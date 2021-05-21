@@ -9,9 +9,9 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
-
+from CREAD import *
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -124,3 +124,35 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+STATIC_URL = '/static/'
+STATICFILES_DIRS=[
+   os.path.join(BASE_DIR,'static')
+]
+
+STATIC_ROOT=os.path.join(BASE_DIR,'Assets')
+
+# copyied from doc
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_USE_TLS = True
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = EMAIL
+# EMAIL_HOST_PASSWORD = PASS
+
+
+# smtp2go
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'mail.smtp2go.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT =  2525
+
+EMAIL_HOST_USER = EMAIL
+EMAIL_HOST_PASSWORD = PASS
+# Alternative PORTS: 8025, 587, 80
+
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+#DATA_UPLOAD_MAX_NUMBER_FIELDS = None
+DATA_UPLOAD_MAX_MEMORY_SIZE=52428800

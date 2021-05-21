@@ -1,0 +1,210 @@
+* {
+       padding: 0;
+       margin: 0;
+       box-sizing: border-box;
+       font-family: 'Roboto', sans-serif;
+   }
+
+   body{
+         color: #555;
+         background-color: #ecf0f3;
+
+   }
+
+   input:-webkit-autofill,
+   input:-webkit-autofill:hover,
+   input:-webkit-autofill:focus,
+   input:-webkit-autofill:active {
+       -webkit-box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
+       border-top-right-radius: 25px;
+       border-bottom-right-radius: 25px;
+       background: #ecf0f3;
+       -webkit-text-fill-color: #555 !important;
+
+   }
+
+   .neo {
+       width: 100%;
+       height: 700px;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       color: #555;
+       background-color: #ecf0f3;
+       margin-top: 10px;
+       margin-bottom: 10px;
+
+   }
+
+   .login {
+        margin-top: 30px;
+        margin-bottom: 30px;
+       width: 420px;
+       height: 600px;
+       padding: 50px 35px 35px 35px;
+       border-radius: 40px;
+       background-color: #ecf0f3;
+       box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
+   }
+
+   .logo {
+       width: 100px;
+       height: 100px;
+       margin: auto;
+   }
+
+   .logo img {
+       width: 100%;
+       height: 100%;
+       border-radius: 50%;
+
+       box-shadow: 0px 0px 5px #474747, 0px 0px 0px 5px #ecf0f3, 8px 8px 15px #8d8e91, -8px -8px 15px #fff;
+   }
+
+   #text-about {
+       text-align: center;
+       font-size: 24px;
+       text-align: center;
+       margin: 10px 0;
+       font-weight: 800;
+   }
+
+   .inputsfileds {
+       width: 100%;
+       padding: 40px 5px 5px 5px;
+   }
+
+   .inputsfileds input {
+       border: none;
+       outline: none;
+       background: none;
+       font-size: 18px;
+       color: #555;
+       padding: 15px 10px 15px 5px;
+       width: 100%;
+
+   }
+
+   .username,
+   .email,
+   .password {
+       margin-bottom: 20px;
+       border-radius: 25px;
+       box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
+       display: flex;
+       align-items: center;
+
+   }
+
+   .inputsfileds svg {
+
+       margin: auto;
+       width: 25px;
+       height: 21px;
+       margin: 0px 10px -3px 20px;
+   }
+
+   .forms button {
+       outline: none;
+       border: none;
+       cursor: pointer;
+       width: 100%;
+       height: 60px;
+       border-radius: 30px;
+       font-size: 20px;
+       font-weight: 700;
+       color: white;
+       text-align: center;
+       background-color: #20dea0;
+       box-shadow: 3px 5px 8px #a3a2a2, -3px -3px 8px #fff;
+   }
+
+   .forms button:hover {
+       background-color: #02c8db;
+   }
+
+   .fp {
+       text-align: center;
+       padding-top: 20px;
+       font-size: 22px;
+   }
+
+   .fp a {
+       text-decoration: none;
+       color: #aaa;
+       font-size: 15px;
+       font-weight: 900;
+       padding-left: 5px;
+       padding-right: 5px;
+   }
+
+   .fp p {
+       font-size: 16px;
+       text-transform: lowercase;
+       font-weight: 800;
+   }
+
+   .jsut {
+       width: 80%;
+   }
+
+
+   @media only screen and (max-width: 640px) {
+       .login {
+           width: 350px;
+       }
+
+   }
+
+   @media only screen and (max-width: 480px) {
+       .login {
+           width: 320px;
+       }
+
+   }
+
+   @media only screen and (max-width: 430px) {
+       .login {
+           width: 300px;
+       }
+
+   }
+
+   @media only screen and (max-width: 410px) {
+       .login {
+           padding: 50px 15px 35px 15px;
+           width: 280px;
+       }
+
+   }
+
+   @media only screen and (max-width: 340px) {
+       .login {
+           padding: 50px 15px 35px 15px;
+           width: 250px;
+       }
+
+       #text-about {
+           font-size: 20px;
+       }
+   }
+
+   @media only screen and (max-width: 310px) {
+       .login {
+           padding: 50px 15px 35px 15px;
+           width: 200px;
+       }
+
+       #text-about {
+           font-size: 16px;
+       }
+
+   }
+
+   @media only screen and (max-width: 310px) {
+       .login {
+           height: 650px;
+       }
+
+
+   }
