@@ -9,8 +9,8 @@ class TEACHER(models.Model):
         return "EMAIL: " + self.teacher.email + " | USERNAME: " + self.teacher.username
 
 class TeacherClassRoom(models.Model):
-    #class Meta:
-        #unique_together = (('teacher', 'classRoomName'))
+    class Meta:
+        unique_together = (('teacher', 'classRoomName'))
     teacher=models.ForeignKey(TEACHER,on_delete=models.CASCADE)
     classRoomName=models.CharField(max_length=25)
 
@@ -18,5 +18,9 @@ class TeacherClassRoom(models.Model):
         return  self. classRoomName[:5]
 
 class StudentInClassRoom(models.Model):
-    classId=models.ForeignKey(TeacherClassRoom,on_delete=models.CASCADE)
+    class Meta:
+        unique_together = (('classId', 'student'))
+
+
+    classId=models.ForeignKey(TeacherClassRoom,on_delete=models.CASCADE,to_field='id')
     student=models.ForeignKey(User,on_delete=models.CASCADE)
