@@ -1,0 +1,250 @@
+* {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+
+    }
+
+    nav {
+        background-color: #1b1b1b;
+        position: sticky;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        box-shadow: 0px 0px 25px 0px #000000fa;
+        color: white;
+        z-index: 1000;
+        transition: background 1s ease;
+        padding: 10px 5px;
+
+
+    }
+
+    nav::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    nav ul {
+        float: right;
+        list-style: none;
+        margin-right: 40px;
+        position: relative;
+
+    }
+
+    nav ul li {
+        float: left;
+        display: inline-block;
+        background: #1b1b1b;
+        margin: 0 5px;
+
+
+    }
+
+    nav ul li a {
+        text-decoration: none;
+        line-height: 70px;
+        font-size: 18px;
+        padding: 8px 15px;
+        text-transform: uppercase;
+        color: white;
+    }
+
+    nav ul li a:hover {
+        box-shadow: 0 0 5px #33ffff, 0 0 6px #66ffff;
+        border-radius: 6px;
+        color: cyan;
+    }
+
+    nav ul li:hover>ul {
+        opacity: 1;
+        visibility: visible;
+        top: 70px;
+    }
+
+    nav ul ul {
+        position: absolute;
+        top: 90px;
+        opacity: 0;
+        visibility: hidden;
+        transition: top 0.3s;
+        border-top: 3px solid cyan;
+
+    }
+
+    nav ul ul li a:hover {
+
+        color: cyan;
+        box-shadow: none;
+
+    }
+
+    nav ul ul li {
+        position: relative;
+        margin: 0;
+        width: 150px;
+        float: none;
+        display: list-item;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    }
+
+    nav .logo {
+        float: left;
+        color: white;
+        font-size: 27px;
+        font-weight: 600;
+        line-height: 70px;
+        padding-left: 60px;
+    }
+
+    .showlabel,
+    nav input {
+        display: none;
+    }
+
+    .icon {
+
+        display: none;
+
+
+    }
+      .fullheader {
+          display: block;
+
+      }
+
+
+
+    @media only screen and (max-width: 990px) {
+
+        nav {
+            overflow-x: hidden;
+        }
+
+        nav ul {
+            margin-right: 0px;
+            float: left;
+        }
+
+        #listviewheader {
+            min-height: calc(100vh - 70px);
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+            .fullheader {
+                display: none;
+
+            }
+
+
+        nav .logo {
+            width: 100%;
+            padding-left: 15px;
+        }
+
+        nav ul li,
+        nav ul ul li {
+            display: block;
+            width: 100%;
+
+
+        }
+
+
+        nav ul ul {
+            top: 70px;
+            border-top: 0px;
+            float: none;
+            position: static;
+            display: none;
+            opacity: 1;
+            visibility: visible;
+
+        }
+
+        .showlabel {
+            display: block;
+            color: white;
+            font-size: 18px;
+            padding: 0 20px;
+            line-height: 70px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .showlabel:hover {
+            color: cyan;
+        }
+
+        nav ul li a:hover {
+            box-shadow: none;
+        }
+
+        nav ul li a {
+
+            display: flex;
+
+            align-items: center;
+
+        }
+
+        .icon {
+
+            display: block;
+            color: white;
+            line-height: 70px;
+            right: 40px;
+            position: absolute;
+            font-size: 25px;
+            cursor: pointer;
+
+        }
+
+        .showlabel+a,
+        ul {
+            display: none;
+        }
+
+        nav ul ul a {
+            padding-left: 40px;
+        }
+
+
+        [id^=btn]:checked+ul {
+            display: block;
+        }
+
+        nav ul ul li {
+            border-bottom: 0px;
+        }
+
+        span.cancel:before {
+            content: '\f00d';
+        }
+
+
+
+
+    }
+
+
+    @media only screen and (max-width: 340px) {
+
+        nav .logo {
+            padding-left: 15px;
+            font-size: 14px;
+
+        }
+
+        nav ul li a {
+            font-size: 14px;
+        }
+
+        .showlabel {
+            font-size: 14px;
+        }
+
+    }

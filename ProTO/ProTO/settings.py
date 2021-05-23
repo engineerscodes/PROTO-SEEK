@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Account',
     'videos',
+    'Event'
 ]
 
 MIDDLEWARE = [
@@ -153,7 +154,6 @@ EMAIL_HOST_PASSWORD = PASS
 
 
 MEDIA_URL = '/media/'
-
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 #DATA_UPLOAD_MAX_NUMBER_FIELDS = None
 DATA_UPLOAD_MAX_MEMORY_SIZE=52428800
