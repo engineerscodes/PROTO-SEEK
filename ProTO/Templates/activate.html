@@ -1,0 +1,7 @@
+{%  autoescape off %}
+
+HI {{user.username}}
+plz click the click below
+
+http://{{domain}}{% url 'activate' uidb64=uid token=TOKEN %}
+{% endautoescape %}

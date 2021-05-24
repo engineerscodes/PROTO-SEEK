@@ -3,7 +3,7 @@ from .VideoSizeVal import file_size
 from django.core.validators import FileExtensionValidator
 from django.core.validators import MaxValueValidator, MinValueValidator
 # Create your models here.
-
+from Event.models import Event
 
 class videoUpload(models.Model):
 
@@ -15,7 +15,7 @@ class videoUpload(models.Model):
     video=models.FileField(upload_to="videos/%y",validators=[file_size,FileExtensionValidator(allowed_extensions=['mp4','MOV','MKV'])])
     url_64encoding=models.CharField(max_length=2048,default='/upload/videos/')
     Total_marks=models.IntegerField(default=0)
-
+    Eventkey=models.ForeignKey(Event, on_delete=models.CASCADE)
     def __str__(self):
         return  self.captions
     def total_marks(self):
