@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from rest_framework import status
 from .models import StudentInClassRoom
 from django.contrib.auth.models import auth, User
-from Teacher.models import TEACHER, TeacherClassRoom
+from Teacher.models import TEACHER, TeacherClassRoom, StudentInClassRoom
 from .forms import ClassRoomForm
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_text, force_bytes
@@ -62,4 +62,29 @@ def new_class(request):
 
 
 def join_class(request):
-    return HttpResponse("HHH")
+    if not request.user.is_authenticated:
+        return redirect('/')
+
+    if request.method == "GET":
+        return render(request, 'joinClass.html')
+
+    if request.method == 'POST':
+
+        ClassCode = request.POST['class_code']
+
+        try:
+            Cl_id = force_text(urlsafe_base64_decode(ClassCode))
+            temT = TeacherClassRoom.objects.get(pk=Cl_id)
+            if temT.teacher==TEACHER.objects.get(pk=request.user) :
+                messages.info(request, 'You cannot join Your Class !!')
+                return redirect('/teacher/join/')
+            StudentInClassRoom.objects.create(classId=temT, student=User.objects.get(username=request.user.username))
+            messages.info(request,f'Joined New Class {temT.classRoomName}')
+        except IntegrityError as e:
+            messages.info(request,"YOUR HAVE ALREADY JOINDED THE CLASS !!")
+        except Exception as e:
+           messages.info(request,'INVALID CODE !!')
+
+        return  redirect('/teacher/join/')
+
+

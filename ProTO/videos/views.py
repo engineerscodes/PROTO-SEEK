@@ -28,6 +28,8 @@ def upload_file(request):
 
         form = vd_form()
         event=Events.objects.all()
+        #event=Events.objects.filter(student=request.user)
+
         return render(request, "upload.html", {"form": form,"event":event})
     else :
         return redirect('/account/login')

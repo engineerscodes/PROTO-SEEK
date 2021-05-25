@@ -22,8 +22,6 @@ class TeacherClassRoom(models.Model):
 class StudentInClassRoom(models.Model):
     class Meta:
         unique_together = (('classId', 'student'))
-
-
     classId=models.ForeignKey(TeacherClassRoom,on_delete=models.CASCADE,to_field='id')
     student=models.ForeignKey(User,on_delete=models.CASCADE)
 
