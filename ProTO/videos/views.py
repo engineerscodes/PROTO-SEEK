@@ -13,6 +13,8 @@ from .serializers import  videoUploadSerializer,MarksSerializer,SubmitVideo,VDCo
 from rest_framework.parsers import MultiPartParser, FormParser, FileUploadParser
 from datetime import date
 from django.utils.encoding import force_text, force_bytes
+from Teacher.models import StudentInClassRoom,TeacherClassRoom
+
 Events=apps.get_model('Event','Event')
 
 def homepage(request):
@@ -27,8 +29,13 @@ def upload_file(request):
             return redirect('/account/login')
 
         form = vd_form()
-        event=Events.objects.all()
-        #event=Events.objects.filter(student=request.user)
+        student_in_class=StudentInClassRoom.objects.filter(student=request.user)
+        class_id_list=student_in_class.values_list('classId')
+        teacher_room=TeacherClassRoom.objects.filter(pk__in=class_id_list)
+        teacher_room_id_list=teacher_room.values_list('id')
+        print(teacher_room)
+        event=Events.objects.filter(Room__in=teacher_room_id_list)
+        #print(event)
 
         return render(request, "upload.html", {"form": form,"event":event})
     else :
