@@ -11,7 +11,7 @@ from django.utils.encoding import force_text, force_bytes
 from django.db import IntegrityError
 
 
-# Create your views here.
+
 
 def reg_teacher(request):
     if request.user.is_authenticated == False:
@@ -86,5 +86,19 @@ def join_class(request):
            messages.info(request,'INVALID CODE !!')
 
         return  redirect('/teacher/join/')
+
+
+def view_class(request, cl_id):
+    if request.method=='GET':
+        try:
+            get_class=TeacherClassRoom.objects.get(class_url=cl_id)
+            if get_class.teacher==TEACHER.objects.get(pk=request.user):
+                get_students=StudentInClassRoom.objects.filter(classId=get_class.id)
+                return render(request,'class_student.html',{'clsName':get_class.classRoomName,'students':get_students})
+            else:
+                return redirect('/')
+        except Exception as e:
+            return HttpResponse("CLASS DOSNOT EXIST")
+
 
 

@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'Account',
     'videos',
     'Event',
-    'Teacher'
+    'Teacher',
+    'Moderator',
 ]
 
 MIDDLEWARE = [

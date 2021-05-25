@@ -1,0 +1,100 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{data.captions}}</title>
+    <link rel="stylesheet" href="{% static 'css/videocss.css' %}">
+    <link rel="stylesheet" href="{% static 'css/headercss.css' %}">
+    <script src="https://kit.fontawesome.com/427ff44d09.js" crossorigin="anonymous"></script>
+    <link href="https://vjs.zencdn.net/7.11.4/video-js.css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+    {% include "header.html" %}
+    <div class="container containerHomepage">
+        <div class="VD">
+            <!-- <video controls="controls" width="100%" height="450px" controlsList="nodownload" style="object-fit:contain;">
+            <source src="{{data.video.url}}" type="video/mp4" />
+         </video>
+      -->
+            <video id="my-video" class="video-js " controls preload="auto" data-setup="{}">
+                <source src="{{data.video.url}}" type="video/mp4" />
+
+            </video>
+            <div class="vd_info">
+                <p><b>{{data.captions}}</b></p>
+                <h3>Event Name : {{data.EventName}}</h3>
+                <h3>Uploaded by : {{data.username}}</h3>
+                <h3>ON :{{data.date}}</h3>
+            </div>
+        </div>
+
+
+        {% if  user.is_authenticated and MODES %}
+        <div>
+            <form method="post">
+                {% csrf_token %}
+                <div class="marks_mod">
+                    <diV><label for="vd">MARKS </label></diV>
+                    <diV> <input type="number" name="video_marks" required id="vd"
+                            placeholder="THE MARKS WILL BE OVERRIDE" min="0"></diV>
+                </div>
+                <diV id="bUTTONSn"> <button type="submit">SUBMIT</button></diV>
+            </form>
+        </div>
+        {% endif %}
+
+
+        <div class="mod_marks_view">
+            {% if user.is_authenticated %}
+            {% if MODES  or user.is_staff %}
+            <div class="bgmarks">
+                <ol>
+                    {% for j in Marks %}
+                    <li>{{j.marks}} by-{{j.moderator_email}}</li>
+                    {% endfor %}
+                </ol>
+            </div>
+            {% endif %}
+            {% endif %}
+
+        </div>
+
+        <div class="messflex">
+            {% for mess in messages %}
+            <h4>{{mess}}</h4>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
+    </script>
+    <script>
+        $('.icon').click(function () {
+            $('span').toggleClass("cancel");
+            const mediaQuery = window.matchMedia('(max-width: 990px)')
+
+            if (mediaQuery.matches) {
+                let win = document.getElementsByClassName('containerHomepage')[0];
+                if (!win.classList.contains('fullheader'))
+                    win.classList.add('fullheader');
+                else
+                    win.classList.remove('fullheader');
+            }
+
+        });
+    </script>
+    <script src="https://vjs.zencdn.net/7.11.4/video.min.js"></script>
+
+</body>
+
+</html>
