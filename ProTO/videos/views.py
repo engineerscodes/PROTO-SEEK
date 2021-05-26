@@ -44,10 +44,14 @@ def Home_student(request):
 
         try:
             is_Student = StudentInClassRoom.objects.filter(student=request.user)
-
+            All_List=is_Student.values_list('classId')
+            teacher_room = TeacherClassRoom.objects.filter(pk__in=All_List)
+            print(teacher_room)
         except Exception as e:
+
             return HttpResponse("Check your email")
-    return render(request, 'student.html', {'classes': is_Student})
+        Zipped=zip(is_Student,teacher_room)
+    return render(request, 'student.html', {'classes': Zipped})
 
 
 def get_class(request, cl_name, cl_id):
@@ -56,20 +60,25 @@ def get_class(request, cl_name, cl_id):
     if request.method == "GET":
         try:
             is_Student = StudentInClassRoom.objects.get(pk=cl_id)
-            # print(request.user,is_Student.student,is_Student.classId,cl_name)
+            print(request.user,is_Student.student,is_Student.classId,cl_name)
             if request.user == is_Student.student and str(is_Student.classId) == cl_name:
-                return HttpResponse("DONE")
+                print(TeacherClassRoom.objects.get(pk=cl_name),'$$$$$$$$$$$$$$$')
+                #class_event=Events.objects.get(Room=cl_name)
+                #print(class_event)
+                return redirect('/upload/')
             else:
                 return HttpResponse("You cannot Access this Class")
         except Exception as e:
+            print(e)
             return HttpResponse("No SUCH CLASS ROOM EXIST")
+
 
 
 
 def upload_file(request):
     if request.method == "GET":
         user = request.user
-        if not user.is_authenticated == False:
+        if not user.is_authenticated:
             return redirect('/account/login')
 
         form = vd_form()
@@ -108,9 +117,12 @@ class ajaxsubmitVideo(APIView):
                     video = videoUpload.objects.get(pk=new_form.id)
                     video.url_64encoding = urlsafe_base64_encode(force_bytes(new_form.id))
                     video.thumbnail = serializerss.validated_data['thumbnail']
-                    video.EventName = request.POST['events']
-
-                    video.save()
+                    video.EventID=request.POST['events']
+                    try:
+                        video.EventName = Events.objects.get(pk=request.POST['events']).eventname
+                        video.save()
+                    except Exception as e:
+                        return Response(data="Event doesnot exist", status=status.HTTP_400_BAD_REQUEST)
                     # serializerss.save(username=request.user.email,date= date.today().strftime('%Y-%m-%d'))
                     # print(videoUpload.objects.filter(pk=serializerss))
                 return Response("VIDEO SUMBITTED", status=status.HTTP_200_OK)

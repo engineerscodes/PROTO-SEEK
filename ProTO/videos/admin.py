@@ -3,11 +3,11 @@ from .models import videoUpload,Marks
 # Register your models here.
 
 class adminvideoDetails(admin.ModelAdmin):
-    list_display=('username','Total_marks','date','EventName')
+    list_display=('username','Total_marks','date','EventName','EventID')
     search_fields = ('username','date','captions','EventName')
-    list_filter = ('username','date','EventName')
+    list_filter = ('username','date','EventName','EventID')
     exclude = ('thumbnail',)
-    readonly_fields =('username','url_64encoding','Total_marks','EventName')
+    readonly_fields =('username','url_64encoding','Total_marks','EventName','EventID')
 
 class MarksDetails(admin.ModelAdmin):
     list_display = ('videoId','by_email','marks','moderator_email','date','EventName')

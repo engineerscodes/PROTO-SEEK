@@ -116,7 +116,7 @@
                         <select name="events" id="E" required>
                             <option value="">None</option>
                             {% for n in event %}
-                            <option value="{{n.eventname}}">{{n.eventname}}</option>
+                            <option value="{{n.id}}">{{n.eventname}}</option>
                             {% endfor %}
                         </select>
                         <input type="url" id="output2" name="thumbIMG" style="display:none;">

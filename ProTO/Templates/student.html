@@ -10,10 +10,9 @@
 
 <body>
      <h1>{{user}}</h1>
-    {% for i in classes %}
-
+    {% for i ,j in classes %}
     <div>
-        <a href="class/{{i.classId}}/{{i.id}}">{{i.classId}}</a>
+        <a href="class/{{i.classId}}/{{i.id}}">{{j.classRoomName}}</a>
 
     </div>
     {% endfor %}

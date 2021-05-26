@@ -17,7 +17,7 @@ class TeacherClassRoom(models.Model):
     class_url=models.CharField(max_length=2000,blank=True)
 
     def __str__(self):
-        return  self. classRoomName
+        return  str(self.id)
 
 class StudentInClassRoom(models.Model):
     class Meta:
