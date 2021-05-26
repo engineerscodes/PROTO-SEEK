@@ -82,14 +82,18 @@ def join_class(request):
         try:
             Cl_id = force_text(urlsafe_base64_decode(ClassCode))
             temT = TeacherClassRoom.objects.get(pk=Cl_id)
-            if temT.teacher==TEACHER.objects.get(pk=request.user) :
-                messages.info(request, 'You cannot join Your Class !! Becasue You Create It')
-                return redirect('/teacher/join/')
+            try :
+                if temT.teacher==TEACHER.objects.get(pk=request.user) :
+                    messages.info(request, 'You cannot join Your Class !! Becasue You Create It')
+                    return redirect('/teacher/join/')
+            except Exception as e :
+                 pass
             StudentInClassRoom.objects.create(classId=temT, student=User.objects.get(username=request.user.username))
             messages.info(request,f'Joined New Class {temT.classRoomName}')
         except IntegrityError as e:
             messages.info(request,"YOUR HAVE ALREADY JOINDED THE CLASS !!")
         except Exception as e:
+           print(e)
            messages.info(request,'INVALID CLASS CODE !!')
 
         return  redirect('/teacher/join/')
