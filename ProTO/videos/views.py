@@ -38,7 +38,8 @@ def homepage(request):
                 return HttpResponse("Your Request Is Pending for Admin review")
         except Exception as e:
             print(e)
-            return HttpResponse("Your Not Teacher Plz Contact your Admin")
+            #return HttpResponse("Your Not Teacher Plz Contact your Admin")
+            return redirect('/student/')
 
     return render(request, 'AllClass.html', {'classes': all_classes,'videos':all_video})
 

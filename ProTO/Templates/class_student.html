@@ -1,18 +1,89 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{clsName}}</title>
+    <link rel="stylesheet" href="{% static 'css/headercss.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Archivo+Black&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Archivo:700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/427ff44d09.js" crossorigin="anonymous"></script>
+    <style>
+        .bg {
+            background-color: #DEEBFF;
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 800px;
+        }
+
+        #classhoder {
+            padding: 0 30px 0 30px;
+            background-color: #fff;
+            box-shadow: 1px 1px 5px 0 rgb(0 0 0 / 25%);
+            width: 80%;
+            margin: auto;
+            min-height: 300px;
+            border-radius: 5px;
+            display: flex;
+        }
+
+        .column {
+            flex: 50%;
+            padding: 10px;
+            padding-bottom: 25px;
+            font-size: 16px;
+
+        }
+
+        #c1 {
+            border-right: 3px solid #253858;
+        }
+    </style>
 </head>
+
 <body>
-     
-     {% for i in students %}
-      <div>
-          <b> {{i.student}} </b>
-          <hr>
-      </div>
-      {% endfor %}
+    {% include "header.html" %}
+    <div class="bg">
+        <div style="text-align: center;  color: #253858;; font-size: 64px; margin: 0 0 25px 0; padding-top: 25px;">
+            WELCOME TO {{clsName}}
+        </div>
+        <div
+            style="text-align: center; font-size: 48px; color: #253858;; margin: 25px 0 0 0; text-transform: uppercase; padding-bottom: 25px;">
+            List of student
+        </div>
+        <div id="classhoder">
+            <div class="column" id="c1">
+                <div style="margin-top:15px;">
+                    <b>STUDENT </b>
+
+                </div>
+                {% for i in students %}
+
+                <div>
+                    <b> {{i.student}} </b>
+
+                </div>
+                {% endfor %}
+            </div>
+            <div class="column">
+                <div style="margin-top:15px;">
+                    <b>EMAIL </b>
+
+                </div>
+                {% for i in students %}
+                <div>
+                    <b> {{i.student.email}} </b>
+
+                </div>
+                {% endfor %}
+            </div>
+
+
+        </div>
+    </div>
 </body>
+
 </html>

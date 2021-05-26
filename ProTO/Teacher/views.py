@@ -54,11 +54,18 @@ def new_class(request):
                 url_enode = urlsafe_base64_encode(force_bytes(new_form.id))
                 new_form.class_url = url_enode
                 new_form.save()
-                return HttpResponse(f"url to the class room is {url_enode}")
+                return render(request,'gallery.html',{'code':url_enode})
+                #return HttpResponse(f"CLASS CODE IS {url_enode} and urls is teacher/class/{url_enode}")
             except IntegrityError as e:
-                return HttpResponse("Class Name Already Exist Please change the Name ")
+                alclass=TeacherClassRoom.objects.get(teacher=TEACHER.objects.get(pk=request.user),classRoomName= form.cleaned_data['classRoomName'])
+                messages.info(request,"Class Name Already Exist  Please change the Name")
+                return render(request, 'gallery.html', {'code': alclass})
+                #return HttpResponse("Class Name Already Exist Please change the Name ")
         else:
-            return HttpResponse("Some Issue Try again later !")
+            #return HttpResponse("Some Issue Try again later !")
+            messages.info(request, "Some Issue Try again later !")
+            return render(request, 'gallery.html', {'code': None})
+
 
 
 def join_class(request):
@@ -76,14 +83,14 @@ def join_class(request):
             Cl_id = force_text(urlsafe_base64_decode(ClassCode))
             temT = TeacherClassRoom.objects.get(pk=Cl_id)
             if temT.teacher==TEACHER.objects.get(pk=request.user) :
-                messages.info(request, 'You cannot join Your Class !!')
+                messages.info(request, 'You cannot join Your Class !! Becasue You Create It')
                 return redirect('/teacher/join/')
             StudentInClassRoom.objects.create(classId=temT, student=User.objects.get(username=request.user.username))
             messages.info(request,f'Joined New Class {temT.classRoomName}')
         except IntegrityError as e:
             messages.info(request,"YOUR HAVE ALREADY JOINDED THE CLASS !!")
         except Exception as e:
-           messages.info(request,'INVALID CODE !!')
+           messages.info(request,'INVALID CLASS CODE !!')
 
         return  redirect('/teacher/join/')
 
@@ -98,6 +105,7 @@ def view_class(request, cl_id):
             else:
                 return redirect('/')
         except Exception as e:
+            print(e)
             return HttpResponse("CLASS DOSNOT EXIST")
 
 

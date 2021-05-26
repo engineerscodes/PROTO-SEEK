@@ -1,4 +1,3 @@
-
 {% load static %}
 {% static "images" as baseUrl %}
 
@@ -12,6 +11,8 @@
     <title>HOME-PAGE</title>
     <link rel="stylesheet" href="{% static 'css/headercss.css' %}">
     <link rel="stylesheet" href="{% static  'css/homepage.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Archivo+Black&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Archivo:700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/427ff44d09.js" crossorigin="anonymous"></script>
     <style>
         .progress-bar {
@@ -55,22 +56,117 @@
             outline: none;
         }
     </style>
+    <style>
+        .card {
+        background-color: white;
+        display: block;
+        width: 250px;
+        min-height: 90px;
+        border: 3px solid #555BFF;
+        padding: 15px;
+        overflow-x: hidden;
+        box-shadow: 10px -10px 0 -3px white, 10px -10px #1FC11B,
+        20px -20px 0 -3px white, 20px -20px #FFD913,
+        30px -30px 0 -3px white, 30px -30px #FF9C55,
+        40px -40px 0 -3px white, 40px -40px #FF5555;
+        transition: box-shadow 1s, top 1s, left 1s;
+        position: relative;
+        top: 0;
+        left: 0;
+        cursor: pointer;
+        }
+
+        .card:hover {
+        top: -40px;
+        left: 40px;
+        box-shadow: 0 0 0 -3px white, 0 0 0 0 #1FC11B,
+        0 0 0 -3px white, 0 0 0 0 #FFD913,
+        0 0 0 -3px white, 0 0 0 0 #FF9C55,
+        0 0 0 -3px white, 0 0 0 0 #FF5555;
+        }
+        
+        .card p {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 10px;
+        }
+
+        .card h2 {
+        font-size: 14px;
+        font-family: "Archivo Black", "Archivo", sans-serif;
+        font-weight: normal;
+        }
+        .ClassCON{
+            margin-top: 50px;
+            display: grid;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            justify-items: center;
+            border-radius: 5px;
+            grid-row-gap: 60px;
+            margin-bottom: 30px;
+        }
+        @media only screen and (max-width: 680px){
+          .card {
+              width: 200px;
+          }
+        }
+
+        @media only screen and (max-width: 500px){
+            .NamesCL h1{
+                font-size: 20px;
+            }
+            .headingBout h1{
+                font-size:  20px;
+            }
+        .card {
+        width: 150px;
+        }
+        .ClassCON{
+       
+        grid-template-columns: repeat(1, 1fr);
+        }
+        }
+    </style>
 </head>
 
 <body>
 
     {% include "header.html" %}
 
-    <div class="container containerHomepage">
-         
+    <div class="NamesCL" style="text-align: center; height: 50px; font-size: 32px; margin-top: 10px; color: black;">
+         <h1 style="color: black;">CLASS ROOMS</h1>
+    </div> 
+
+    <div class="ClassCON">
+
+
+
+        {% for i in classes %}
+
+        <div class="card">
+            <p style="color: black;">
+                Class ROOM
+            </p>
+            <h2>
+                <a style="color: black;" href="teacher/class/{{i.class_url}}">{{i.classRoomName}}</a>
+            </h2>
+        </div>
+
+        {% endfor %}
+
+
+    </div>
+    <div class="headingBout" style="text-align: center; " >
+           <h1 style="color: black; text-decoration: underline;">PENDING VIDEO'S</h1>
+    </div>
+
+    <div class="container containerHomepage" style="margin-bottom: 20px;">
+
 
         <div class="about">
-         {% for i in classes %}
-         <div style="color: black;">
-             <a style="color: black;" href="teacher/class/{{i.class_url}}">{{i.classRoomName}}</a>
 
-         </div>
-         {% endfor %}
         </div>
 
         <div class="vidoeGrid">

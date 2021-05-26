@@ -51,10 +51,6 @@ def reg(request):
         password = request.POST['password_cfn']
         email = request.POST['emails']
 
-        if re.search('^[a-zA-z]+\.[0-9a-zA-Z]+@vitap\.ac\.in$', email) is None:
-            # print(re.search('^[a-zA-z]+\.[0-9a-zA-Z]+@vitap\.ac\.in$',email),"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-            messages.info(request, "USE VITAP MAIL ONLY ")
-            return redirect('/account/reg/')
 
         if User.objects.filter(username=userName).exists():
             messages.info(request, " UserName is not Available")
@@ -63,8 +59,7 @@ def reg(request):
             messages.info(request, " MAIL IS ALREADY REG")
             return redirect('/account/reg/')
 
-        if re.search('^[a-zA-z]+\.[0-9a-zA-Z]+@vitap\.ac\.in$', email) is not None and User.objects.filter(
-                username=userName).exists() == False:
+        if  not User.objects.filter(username=userName).exists():
             user = User.objects.create_user(username=userName, password=password, email=email)
             user.is_active = False
             user.save()
