@@ -15,6 +15,12 @@ class videoUploadSerializer(serializers.ModelSerializer):
         #fields="__all__"
         fields=('url_64encoding','date','username')
 
+class videoUploadSerializerMark(serializers.ModelSerializer):
+    class Meta:
+        model= videoUpload
+        #fields="__all__"
+        fields=('url_64encoding','date','username','EventName')
+
 class SubmitVideo(serializers.ModelSerializer) :
 
     class Meta :

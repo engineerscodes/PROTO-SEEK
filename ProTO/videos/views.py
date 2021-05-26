@@ -9,11 +9,12 @@ from rest_framework.views import APIView
 from .models import videoUpload, Marks
 from rest_framework.response import Response
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from .serializers import videoUploadSerializer, MarksSerializer, SubmitVideo, VDContent, EventSerial
+from .serializers import videoUploadSerializer, MarksSerializer, SubmitVideo, VDContent, EventSerial, videoUploadSerializerMark
 from rest_framework.parsers import MultiPartParser, FormParser, FileUploadParser
 from datetime import date
 from django.utils.encoding import force_text, force_bytes
 from Teacher.models import StudentInClassRoom, TeacherClassRoom, TEACHER
+from rest_framework.decorators import api_view
 
 Mode = apps.get_model('Moderator', 'Mode')
 Events = apps.get_model('Event', 'Event')
@@ -28,13 +29,18 @@ def homepage(request):
             is_teacher = TEACHER.objects.get(teacher=request.user)
             if is_teacher.is_active:
                 all_classes = TeacherClassRoom.objects.filter(teacher=is_teacher)
-                print(all_classes)
+                #print(all_classes.values_list('id'))
+                all_events=Events.objects.filter(Room__in=all_classes.values_list('id'))
+                #print(all_events.values_list('id'))
+                all_video=videoUpload.objects.filter(EventID__in=all_events.values_list('id'))
+                #print(all_video)
             else:
                 return HttpResponse("Your Request Is Pending for Admin review")
         except Exception as e:
+            print(e)
             return HttpResponse("Your Not Teacher Plz Contact your Admin")
 
-    return render(request, 'AllClass.html', {'classes': all_classes})
+    return render(request, 'AllClass.html', {'classes': all_classes,'videos':all_video})
 
 
 def Home_student(request):
@@ -46,7 +52,7 @@ def Home_student(request):
             is_Student = StudentInClassRoom.objects.filter(student=request.user)
             All_List=is_Student.values_list('classId')
             teacher_room = TeacherClassRoom.objects.filter(pk__in=All_List)
-            print(teacher_room)
+            #print(teacher_room)
         except Exception as e:
 
             return HttpResponse("Check your email")
@@ -146,14 +152,26 @@ def getSingleVideo(request, uuid):
         try:
             id = force_text(urlsafe_base64_decode(uuid))
             video = videoUpload.objects.get(pk=id)
-        except Exception:
+
+            event_trg = Events.objects.get(pk=video.EventID)
+            #print(event_trg.Room)
+            temp=event_trg.Room
+            #print(str(temp),)
+            Is_teacher_room=TeacherClassRoom.objects.get(pk=str(temp))
+            print(Is_teacher_room.teacher)
+            if  not Is_teacher_room.teacher==TEACHER.objects.get(pk=request.user) :
+                 return HttpResponse('No Access')
+        except Exception as e:
             video = None
+            print(e)
+            return HttpResponse("Video Doesnot Exist")
 
         if video is not None:
             try:
-                pass
+                current_video_marks = Marks.objects.filter(videoId=id)
+                return render(request, 'video.html', {'data': video, 'MODES': True, 'Marks': current_video_marks})
             except Exception:
-                mode_team = None
+                return redirect('/videos/')
 
         else:
             return redirect('/videos/')
@@ -209,3 +227,154 @@ def getSingleVideo(request, uuid):
                 return redirect(f'/videos/{uuid}')
         else:
             return redirect('/videos')
+
+
+def allVideos_of_class(request):
+
+   return HttpResponse("SOON")
+
+@api_view(['GET'])
+def getcontent(request):
+
+    if request.method =='GET':
+        if request.is_ajax() and request.user.is_authenticated:
+            try:
+                is_teacher = TEACHER.objects.get(teacher=request.user)
+                if is_teacher.is_active:
+                    all_classes = TeacherClassRoom.objects.filter(teacher=is_teacher)
+                    # print(all_classes.values_list('id'))
+                    all_events = Events.objects.filter(Room__in=all_classes.values_list('id'))
+                    # print(all_events.values_list('id'))
+                    all_video = videoUpload.objects.filter(EventID__in=all_events.values_list('id'),Total_marks=0)
+                    # print(all_video)
+                else:
+                    return HttpResponse("Your Request Is Pending for Admin review")
+            except Exception as e:
+                return HttpResponse("Your Not Teacher Plz Contact your Admin")
+            try :
+              index=int(request.GET.get('vdreq'))
+            except:
+                return Response("EXCEPTION HAPPENDED", status=status.HTTP_400_BAD_REQUEST)
+            #Total=videoUpload.objects.all().count()
+            #print(Total)
+            #print(index*6)
+            allcontent =  all_video.reverse()[6*(index-1):6*index]
+            videofile= VDContent(allcontent,many=True)
+            return Response({"data":videofile.data})
+        else :
+            return Response("PLZ AUTHENTICATE AND CALL MUST BE AJAX", status=status.HTTP_400_BAD_REQUEST)
+
+
+def classesInof(request):
+
+    if request.method =='GET':
+        try:
+            is_teacher = TEACHER.objects.get(teacher=request.user)
+            if is_teacher.is_active:
+                all_classes = TeacherClassRoom.objects.filter(teacher=is_teacher)
+                # print(all_classes.values_list('id'))
+                all_events = Events.objects.filter(Room__in=all_classes.values_list('id'))
+                # print(all_events.values_list('id'))
+                pending_video = videoUpload.objects.filter(EventID__in=all_events.values_list('id'), Total_marks=0)
+                correctVideo=videoUpload.objects.filter(EventID__in=all_events.values_list('id'), Total_marks__gt=0)
+                # print(all_video)
+            else:
+                return HttpResponse("Your Request Is Pending for Admin review")
+        except Exception as e:
+            return HttpResponse("Your Not Teacher Plz Contact your Admin")
+    return render(request, 'info.html', {'marks': correctVideo, 'LeftOver':pending_video })
+
+
+@api_view(['GET'])
+def analaytics(request):
+    if request.method == 'GET':
+
+        if request.method == 'GET':
+            try:
+                is_teacher = TEACHER.objects.get(teacher=request.user)
+                if is_teacher.is_active:
+                    all_classes = TeacherClassRoom.objects.filter(teacher=is_teacher)
+                    # print(all_classes.values_list('id'))
+                    all_events = Events.objects.filter(Room__in=all_classes.values_list('id'))
+                    # print(all_events.values_list('id'))
+                    pending_video = videoUpload.objects.filter(EventID__in=all_events.values_list('id'), Total_marks=0).count()
+                    correctVideo = videoUpload.objects.filter(EventID__in=all_events.values_list('id'),
+                                                              Total_marks__gt=0).count()
+                    # print(all_video)
+                else:
+                    return HttpResponse("Your Request Is Pending for Admin review")
+            except Exception as e:
+                return HttpResponse("Your Not Teacher Plz Contact your Admin")
+            if request.is_ajax():
+                return Response({"Left_count":pending_video,"Actual_corrected":correctVideo })
+
+        else :
+            return Response ({"data":"Acess DENIED "},status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+def ajaxModeration(request):
+    if request.method == 'GET':
+        try:
+            is_teacher = TEACHER.objects.get(teacher=request.user)
+            if is_teacher.is_active:
+                all_classes = TeacherClassRoom.objects.filter(teacher=is_teacher)
+                # print(all_classes.values_list('id'))
+                all_events = Events.objects.filter(Room__in=all_classes.values_list('id'))
+                # print(all_events.values_list('id'))
+                pending_video = videoUpload.objects.filter(EventID__in=all_events.values_list('id'),
+                                                           Total_marks=0)
+                correctVideo = videoUpload.objects.filter(EventID__in=all_events.values_list('id'),
+                                                          Total_marks__gt=0)
+                # print(all_video)
+            else:
+                return HttpResponse("Your Request Is Pending for Admin review")
+        except Exception as e:
+            return HttpResponse("Your Not Teacher Plz Contact your Admin")
+
+        if request.is_ajax():
+
+              if request.GET['videos']=="verified" :
+                videos_id_list = correctVideo.values_list('id')
+                User_Marks= Marks.objects.filter(videoId__in=videos_id_list)
+                cur_marked=MarksSerializer(User_Marks,many=True)
+                return Response({"data": cur_marked.data})
+              if  request.GET['videos']=="unseen":
+
+                #left_videos=videoUploadSerializer
+                left_cur_marked =videoUploadSerializer(pending_video,many=True)
+                return Response({"data":left_cur_marked.data})
+        else :
+            return Response ({"data":"Acess DENIED "},status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+@api_view(['GET'])
+def eventsajax(request):
+    if request.method == 'GET':
+
+        try:
+            is_teacher = TEACHER.objects.get(teacher=request.user)
+            if is_teacher.is_active:
+                all_classes = TeacherClassRoom.objects.filter(teacher=is_teacher)
+                # print(all_classes.values_list('id'))
+                all_events = Events.objects.filter(Room__in=all_classes.values_list('id'))
+                # print(all_events.values_list('id'))
+                pending_video = videoUpload.objects.filter(EventID__in=all_events.values_list('id'),
+                                                           Total_marks=0)
+                correctVideo = videoUpload.objects.filter(EventID__in=all_events.values_list('id'),
+                                                          Total_marks__gt=0)
+                # print(all_video)
+            else:
+                return HttpResponse("Your Request Is Pending for Admin review")
+        except Exception as e:
+            return HttpResponse("Your Not Teacher Plz Contact your Admin")
+        if request.is_ajax():
+            #allmark_user = Marks.objects.filter(moderator_email=request.user.email).order_by('EventName')
+            #cur_marked=MarksSerializer(allmark_user,many=True)
+            left_cur_marked =  videoUploadSerializerMark(pending_video, many=True)
+            return Response({"data": left_cur_marked.data})
+
+        else :
+            return Response ({"data":"Acess DENIED "},status=status.HTTP_400_BAD_REQUEST)

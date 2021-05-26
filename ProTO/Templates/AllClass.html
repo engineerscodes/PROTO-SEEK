@@ -1,17 +1,106 @@
+
+{% load static %}
+{% static "images" as baseUrl %}
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All | Class</title>
+    <title>HOME-PAGE</title>
+    <link rel="stylesheet" href="{% static 'css/headercss.css' %}">
+    <link rel="stylesheet" href="{% static  'css/homepage.css' %}">
+    <script src="https://kit.fontawesome.com/427ff44d09.js" crossorigin="anonymous"></script>
+    <style>
+        .progress-bar {
+            margin: 30px 0;
+            width: 250px;
+            height: 40px;
+            border: 4px solid rgb(255, 255, 255);
+            background-color: #aaaaaa;
+            border-radius: 25px;
+        }
+
+        .progress-bar-filler {
+
+            height: 100%;
+            width: 0%;
+            background-color: rgb(31, 182, 132);
+            display: flex;
+            align-items: center;
+            transition: width 0.25s;
+            border-radius: 25px;
+
+
+        }
+
+        .progress-bar-text {
+            margin-left: 10px;
+            font-weight: bolder;
+            color: rgb(240, 12, 228);
+        }
+
+        @media only screen and (max-width: 1080px) {
+            .progress-bar {
+                width: 80%;
+            }
+        }
+
+        .container .about label,
+        input {
+            color: black;
+            margin-right: 10px;
+            outline: none;
+        }
+    </style>
 </head>
+
 <body>
-       {% for i in classes %}
-       <div>
-          <a href="teacher/class/{{i.class_url}}">{{i.classRoomName}}</a>
-           
-       </div>
-       {% endfor %}
+
+    {% include "header.html" %}
+
+    <div class="container containerHomepage">
+         
+
+        <div class="about">
+         {% for i in classes %}
+         <div style="color: black;">
+             <a style="color: black;" href="teacher/class/{{i.class_url}}">{{i.classRoomName}}</a>
+
+         </div>
+         {% endfor %}
+        </div>
+
+        <div class="vidoeGrid">
+
+
+
+        </div>
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="{% static 'js/HomePages.js' %}"></script>
+
+    <script>
+        $('.icon').click(function () {
+            $('span').toggleClass("cancel");
+
+
+            const mediaQuery = window.matchMedia('(max-width: 990px)')
+
+            if (mediaQuery.matches) {
+                let win = document.getElementsByClassName('containerHomepage')[0];
+                if (!win.classList.contains('fullheader'))
+                    win.classList.add('fullheader');
+                else
+                    win.classList.remove('fullheader');
+            }
+
+        });
+    </script>
 </body>
+
 </html>

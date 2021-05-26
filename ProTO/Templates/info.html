@@ -1,0 +1,365 @@
+{% load static %}
+{% static "images" as baseUrl %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLASS | INOF</title>
+    <link rel="stylesheet" href="{% static 'css/headercss.css' %}">
+    <script src="https://kit.fontawesome.com/427ff44d09.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/info.css' %}">
+    <script type="module" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.js"></script>
+    <style>
+        :root {
+            --nav-width: 92px;
+
+            /*===== Colores =====*/
+            --first-color: #20dea0;
+            --bg-color: #1b1b1b;
+            ;
+            --sub-color: #B6CEFC;
+            --white-color: #FFF;
+
+            /*===== Fuente y tipografia =====*/
+            --body-font: 'Poppins', sans-serif;
+            --normal-font-size: 1rem;
+            --small-font-size: .875rem;
+
+            /*===== z index =====*/
+            --z-fixed: 100;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /*===== l NAV =====*/
+        .l-navbar {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: var(--nav-width);
+            bottom: 0;
+            background-color: var(--bg-color);
+            color: var(--white-color);
+            padding: 1.5rem 1.5rem 2rem;
+            transition: .5s;
+            z-index: var(--z-fixed);
+        }
+
+
+        .nav {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+
+        .nav__brand {
+            display: grid;
+            grid-template-columns: max-content max-content;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .nav__toggle {
+            font-size: 1.25rem;
+            padding: .75rem;
+            cursor: pointer;
+        }
+
+        .nav__logo {
+            color: var(--white-color);
+            font-weight: 600;
+        }
+
+        .nav__link {
+            display: grid;
+            grid-template-columns: max-content max-content;
+            align-items: center;
+            column-gap: .75rem;
+            padding: .75rem;
+            color: var(--white-color);
+            border-radius: .5rem;
+            margin-bottom: 1rem;
+            transition: .3s;
+            cursor: pointer;
+        }
+
+        .nav__link:hover {
+            background-color: var(--first-color);
+        }
+
+        .nav__icon {
+            font-size: 1.25rem;
+        }
+
+        .nav__name {
+            font-size: var(--small-font-size);
+        }
+
+        /*Expander menu*/
+        .expander {
+            width: calc(var(--nav-width) + 9.25rem);
+        }
+
+        /*Add padding body*/
+        .body-pd {
+            padding: 0;
+        }
+
+        /*Active links menu*/
+        .active {
+            background-color: var(--first-color);
+        }
+
+        .activesider {
+            background-color: var(--first-color);
+        }
+
+
+        /*Rotate icon*/
+        .rotate {
+            transform: rotate(180deg);
+        }
+
+        .tableVIEW {
+
+            padding: 16px;
+            position: absolute;
+            left: 92px;
+            right: 0;
+        }
+
+        .kill2-coll {
+            left: calc(92px + 9.25rem);
+            transition: .5s;
+        }
+    </style>
+    <style>
+        .blue {
+            counter-reset: serial-number;
+        }
+
+        #eventsName{
+          
+            display: none;
+        }
+
+        .blue tr td:first-child:before {
+            counter-increment: serial-number;
+            /* Increment the Serial counter */
+            content: counter(serial-number);
+            /* Display the counter */
+        }
+
+        #stats {
+            width: 460px;
+            height: 460px;
+        }
+
+        #diag {
+            padding-top: 10px;
+        }
+
+        .statswrapper {
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            font-size: 24px;
+            line-height: 28px;
+            letter-spacing: .125em;
+            margin: 60px auto;
+            color: #d3d3d3;
+            font-weight: bolder;
+        }
+
+        #infoteller {
+            font-size: 48px;
+            line-height: 28px;
+            letter-spacing: .125em;
+            margin: 30px auto;
+            color: #d3d3d3;
+            font-weight: bolder;
+        }
+
+        @media only screen and (max-width: 600px) {
+
+            #diag {
+
+                width: 300px !important;
+
+
+            }
+
+
+        }
+
+        @media only screen and (max-width: 420px) {
+
+
+            #rightbar>* {
+                left: 92px;
+
+            }
+
+            #stats {
+                left: 92px;
+                width: 150px;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div>
+        {% include "header.html" %}
+    </div>
+
+    <div id="body-pd">
+        <div class="l-navbar" id="navbar">
+            <div class="nav">
+
+                <div>
+                    <div class="nav__brand">
+                        <ion-icon name="menu-outline" class="nav__toggle" id="nav-toggle"></ion-icon>
+                        <a class="nav__logo">FILTER </a>
+                    </div>
+
+                    <div class="nav__list">
+                        <a class="nav__link" id="analytics">
+                            <ion-icon name="pie-chart-outline" class="nav__icon"></ion-icon>
+                            <span class="nav__name" style="text-transform: uppercase;">Analytics</span>
+                        </a>
+                        <a class="nav__link " id="filterbyevent">
+                            <ion-icon name="infinite-outline" class="nav__icon"></ion-icon>
+                            <span class="nav__name">EVENT</span>
+                        </a>
+
+                        <a class="nav__link " id="verified">
+                            <ion-icon name="checkmark-done-circle-outline" class="nav__icon"></ion-icon>
+                            <span class="nav__name">CORRECTED</span>
+                        </a>
+                        <a class="nav__link activesider" id="unseen">
+                            <ion-icon name="alert-outline" class="nav__icon"></ion-icon>
+                            <span class="nav__name">PENDING</span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <a href="https://github.com/engineerscodes/PROTO-SEEK" class="nav__link">
+                    <ion-icon name="help-outline" class="nav__icon"></ion-icon>
+                    <span class="nav__name">T&C</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="tableVIEW containerHomepage" id="rightbar">
+
+        <div class="output">
+
+            <div id="infoteller">
+                PENDING
+            </div>
+
+            <table class="blue">
+                <thead>
+                    <tr>
+
+                        <th>SR.NO</th>
+                        <th style="display: none;" id="eventname">EVENT NAME</th>
+                        <th> link </th>
+                        <th id="UPD">UPLOADED DATE </th>
+                        <th>USER</th>
+                    </tr>
+                </thead>
+                <tbody id="TB">
+                    {% for i in LeftOver %}
+                    <tr>
+                        <td></td>
+                        <td><a href="/videos/{{i.url_64encoding}}" target="_blank">View</a></td>
+                        <td>{{i.date}}</td>
+                        <td>{{i.username}}</td>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+        <div class="statswrapper" id="dia" style="display: none;">
+
+            <div id="stats">
+                <div>
+                    <h1> SUMMARY </h1>
+                </div>
+                <div id="diag">
+                
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{% static 'js/info.js' %}"></script>
+    <script>
+        let showMenu = (toggleId, navbarId, bodyId) => {
+            let toggle = document.getElementById(toggleId),
+                navbar = document.getElementById(navbarId),
+                divpadding = document.getElementById(bodyId),
+                rightcoll = document.getElementById('rightbar');
+
+            if (toggle && navbar) {
+                toggle.addEventListener('click', () => {
+                    navbar.classList.toggle('expander')
+
+                    divpadding.classList.toggle('body-pd')
+                    rightcoll.classList.toggle('kill2-coll')
+                })
+            }
+        }
+        showMenu('nav-toggle', 'navbar', 'body-pd');
+        $('.icon').click(function () {
+            $('span').toggleClass("cancel");
+            const mediaQuery = window.matchMedia('(max-width: 990px)')
+
+            if (mediaQuery.matches) {
+                let win = document.getElementsByClassName('containerHomepage')[0];
+                if (!win.classList.contains('fullheader'))
+                    win.classList.add('fullheader');
+                else
+                    win.classList.remove('fullheader');
+            }
+
+        });
+
+
+        /* const mediaQuery2 = window.matchMedia('(max-width: 600px)')
+         if (mediaQuery2.matches) {
+            
+             let ch=document.getElementById('statcPie');
+
+             ch.style.width = "300px";
+             ch.style.height="300px";
+           
+         }*/
+    </script>
+</body>
+
+</html>
