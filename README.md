@@ -78,7 +78,7 @@
     def __str__(self):
         return "EMAIL: " + self.teacher.email + " | USERNAME: " + self.teacher.username
  ```
-   4. TEACHERS CLASS ROOM USE OF F.K (ForeignKey) check out django doc ,PrimaryKey is ID eg(1,2,3,4,......100....)AutoField
+   4. TEACHERS CLASS ROOM USES OF F.K (ForeignKey) check out django doc ,PrimaryKey is ID eg(1,2,3,4,......100....)AutoField
  ```python
  class TeacherClassRoom(models.Model):
     class Meta:
