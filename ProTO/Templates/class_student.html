@@ -11,6 +11,9 @@
     <link href="https://fonts.googleapis.com/css?family=Archivo+Black&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Archivo:700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/427ff44d09.js" crossorigin="anonymous"></script>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+     <link rel="stylesheet" href="{% static 'css/footer.css' %}">
     <style>
         .bg {
             background-color: #DEEBFF;
@@ -28,6 +31,7 @@
             min-height: 300px;
             border-radius: 5px;
             display: flex;
+            margin-bottom: 50px;
         }
 
         .column {
@@ -40,6 +44,14 @@
 
         #c1 {
             border-right: 3px solid #253858;
+        }
+
+        #event {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+
         }
     </style>
 </head>
@@ -83,7 +95,94 @@
 
 
         </div>
+
+        <div id="classhoder">
+            <div class="column" >
+                <div style="padding-bottom: 10px;">
+                    <b>EVENTS</b>
+                </div>
+                {% for e in Events %}
+                <div>
+                    {{e.eventname }}
+                </div>
+                {% endfor %}
+            </div>
+            <div class="column" id="event">
+                <div style="padding-bottom: 10px;">
+                    <b> EVENT COUNT</b>
+                </div>
+                <div style="text-align: center; font-size: 64px;">
+                    {{Count}}
+                </div>
+
+                <div style="background-image: url(https://raw.githubusercontent.com/engineerscodes/WEB-TECH-LAB/9b5b586fdf4560a86330e023bafd8624d8b67a36/UI/confetti.svg); 
+                    background-size: contain; background-repeat: no-repeat; min-height: 100px; min-width: 100px ;">
+
+                </div>
+            </div>
+
+
+
+
+
+
+        </div>
+
+        <div id="classhoder" style="margin-bottom: 0;">
+            <div class="column" id="event">
+                <div style="padding-bottom: 10px;">
+                    <b> SUBMIITED VIDEOS</b>
+                </div>
+                <div style="text-align: center; font-size: 64px;">
+                    {{Count}}
+                </div>
+                <div>
+                    <img
+                        src="https://github.com/engineerscodes/WEB-TECH-LAB/blob/master/UI/icons8-checked.gif?raw=true"
+                         width="100px" height="100px" />
+                </div>
+
+            </div>
+            <div class="column" id="event">
+                <div style="padding-bottom: 10px;">
+                    <b> PENDING ONES</b>
+                </div>
+                <div style="text-align: center; font-size: 64px;">
+                    {{Count}}
+                </div>
+
+                <div style="background-image: url(https://raw.githubusercontent.com/engineerscodes/WEB-TECH-LAB/f2d03e83d37af8981078f56ac269a0bfbbe491c1/UI/pending.svg); 
+                    background-size: contain; background-repeat: no-repeat; min-height: 100px; min-width: 100px ;">
+
+                </div>
+            </div>
+
+ 
+        </div>
     </div>
+
+    <div class="bg" style="min-height: 50px;">
+
+    </div>
+
+    <div class="footer-basic">
+        <footer>
+            <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i
+                        class="icon ion-social-snapchat"></i></a><a href="#"><i
+                        class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a>
+            </div>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">Home</a></li>
+                <li class="list-inline-item"><a href="#">Services</a></li>
+                <li class="list-inline-item"><a href="#">About</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+            </ul>
+            <p class="copyright">Naveen © 2021</p>
+        </footer>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

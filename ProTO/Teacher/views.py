@@ -10,7 +10,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_text, force_bytes
 from django.db import IntegrityError
 
-
+from Event.models import Event
 
 
 def reg_teacher(request):
@@ -103,14 +103,21 @@ def view_class(request, cl_id):
     if request.method=='GET':
         try:
             get_class=TeacherClassRoom.objects.get(class_url=cl_id)
-            if get_class.teacher==TEACHER.objects.get(pk=request.user):
+            teach=TEACHER.objects.get(pk=request.user)
+            if get_class.teacher==teach:
                 get_students=StudentInClassRoom.objects.filter(classId=get_class.id)
-                return render(request,'class_student.html',{'clsName':get_class.classRoomName,'students':get_students})
+                Event_rec=Event.objects.filter(Room=get_class.id)
+                event_count=Event_rec.count()
+
+                return render(request,'class_student.html',{'clsName':get_class.classRoomName,
+                                     'students':get_students,'Events':Event_rec,'Count':event_count})
             else:
                 return redirect('/')
         except Exception as e:
-            print(e)
-            return HttpResponse("CLASS DOSNOT EXIST")
+            #print(e)
+            #return HttpResponse("CLASS DON'T EXIST")
+            messages.info(request,"CLASS DON'T EXIST!! ")
+            return redirect('/teacher/join/')
 
 
 
