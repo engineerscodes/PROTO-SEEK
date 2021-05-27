@@ -35,7 +35,7 @@ def homepage(request):
                 all_video=videoUpload.objects.filter(EventID__in=all_events.values_list('id'))
                 #print(all_video)
             else:
-                return HttpResponse("Your Request Is Pending for Admin review")
+                return redirect('/student/')
         except Exception as e:
             print(e)
             #return HttpResponse("Your Not Teacher Plz Contact your Admin")
