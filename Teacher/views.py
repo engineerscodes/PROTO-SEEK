@@ -9,7 +9,7 @@ from .forms import ClassRoomForm
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_text, force_bytes
 from django.db import IntegrityError
-
+from videos.models import videoUpload
 from Event.models import Event
 
 
@@ -38,8 +38,16 @@ def reg_teacher(request):
 
 def new_class(request):
     if request.method == 'GET':
-        form = ClassRoomForm()
-        return render(request, 'classRoom.html', {"form": form})
+        try:
+            t=TEACHER.objects.get(pk=request.user)
+        except Exception as e:
+            t=None
+        if t is not None and t.is_active:
+
+            form = ClassRoomForm()
+            return render(request, 'classRoom.html', {"form": form})
+        else :
+            return redirect('/student/')
 
     if request.method == "POST":
         form = ClassRoomForm(data=request.POST)
@@ -108,9 +116,15 @@ def view_class(request, cl_id):
                 get_students=StudentInClassRoom.objects.filter(classId=get_class.id)
                 Event_rec=Event.objects.filter(Room=get_class.id)
                 event_count=Event_rec.count()
-
+                event_id_list=Event_rec.values_list('id')
+                #print(event_id_list)
+                videos=videoUpload.objects.filter(EventID__in=event_id_list).count()
+                leftV = videoUpload.objects.filter(EventID__in=event_id_list,Total_marks__gt=0).count()
+                print(videos,leftV)
                 return render(request,'class_student.html',{'clsName':get_class.classRoomName,
-                                     'students':get_students,'Events':Event_rec,'Count':event_count})
+                                     'students':get_students,'Events':Event_rec,'Count':event_count
+                                                        ,'videoSUB':videos,'leftV':leftV}
+                              )
             else:
                 return redirect('/')
         except Exception as e:
@@ -119,5 +133,17 @@ def view_class(request, cl_id):
             messages.info(request,"CLASS DON'T EXIST!! ")
             return redirect('/teacher/join/')
 
+    if request.method=='POST':
+        try:
+            get_class = TeacherClassRoom.objects.get(class_url=cl_id)
+            teach = TEACHER.objects.get(pk=request.user)
+            #print(get_class.id)
+            #print(teach)
+            Event.objects.create(eventname=request.POST['eventname'],Room=get_class)
+            #return HttpResponse("CREATE CLASS")
+            return redirect(f'/teacher/class/{cl_id}')
+        except Exception as e :
+            #print(e)
+            return redirect(f'/teacher/class/{cl_id}')
 
 

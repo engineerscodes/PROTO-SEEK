@@ -11,15 +11,29 @@
     <link href="https://fonts.googleapis.com/css?family=Archivo+Black&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Archivo:700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/427ff44d09.js" crossorigin="anonymous"></script>
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-     <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
     <style>
         .bg {
             background-color: #DEEBFF;
             background-repeat: no-repeat;
             background-size: cover;
             min-height: 800px;
+        }
+        #eventCON{
+             padding: 0 30px 0 30px;
+             background-color: #fff;
+             box-shadow: 1px 1px 5px 0 rgb(0 0 0 / 25%);
+             width: 80%;
+             margin: auto;
+             min-height: 150px;
+             border-radius: 5px;
+             display: flex;
+             margin-bottom: 50px;
+             align-items: center;
+             justify-content: center;
+             flex-direction: column;
         }
 
         #classhoder {
@@ -97,7 +111,7 @@
         </div>
 
         <div id="classhoder">
-            <div class="column" >
+            <div class="column">
                 <div style="padding-bottom: 10px;">
                     <b>EVENTS</b>
                 </div>
@@ -121,25 +135,19 @@
                 </div>
             </div>
 
-
-
-
-
-
         </div>
 
-        <div id="classhoder" style="margin-bottom: 0;">
+        <div id="classhoder" >
             <div class="column" id="event">
                 <div style="padding-bottom: 10px;">
-                    <b> SUBMIITED VIDEOS</b>
+                    <b> SUBMITTED VIDEOS</b>
                 </div>
                 <div style="text-align: center; font-size: 64px;">
-                    {{Count}}
+                    {{videoSUB}}
                 </div>
                 <div>
-                    <img
-                        src="https://github.com/engineerscodes/WEB-TECH-LAB/blob/master/UI/icons8-checked.gif?raw=true"
-                         width="100px" height="100px" />
+                    <img src="https://github.com/engineerscodes/WEB-TECH-LAB/blob/master/UI/icons8-checked.gif?raw=true"
+                        width="100px" height="100px" />
                 </div>
 
             </div>
@@ -148,7 +156,7 @@
                     <b> PENDING ONES</b>
                 </div>
                 <div style="text-align: center; font-size: 64px;">
-                    {{Count}}
+                    {{leftV}}
                 </div>
 
                 <div style="background-image: url(https://raw.githubusercontent.com/engineerscodes/WEB-TECH-LAB/f2d03e83d37af8981078f56ac269a0bfbbe491c1/UI/pending.svg); 
@@ -157,17 +165,34 @@
                 </div>
             </div>
 
- 
+
         </div>
+
+          <div id="eventCON" style="margin-bottom: 0;">
+            <div>
+                <h1>CREATE EVENT </h1>
+            </div>
+             <div>
+              <form method="POST">
+                  {% csrf_token %}
+                  <input type="text" name="eventname">
+
+                  <button type="submit"> CREATE EVENT</button>
+              </form>
+              </div>
+          </div>
     </div>
+
+
+  
 
     <div class="bg" style="min-height: 50px;">
 
     </div>
 
     {% include "footer.html" %}
-    
-     
+
+
 </body>
 
 </html>
