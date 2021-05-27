@@ -1,7 +1,15 @@
 # PROTO-SEEK
 
 # Video Sharing platform for School and college
-
+# Tech used 
+1. django (Backend)
+2. django rest framework (API)
+3. Ajax
+4. html and css and js
+5. chartjs
+6. bootstrap
+7. static_ranges for video
+8. dj_static
 # ITS A VIDEO ASSESSMENT  CREATE ON ORGANISATION  
  keep in mind studens,techear
 # DIFFERENT LEVELS PRIVILEGES
