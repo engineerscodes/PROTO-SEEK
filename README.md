@@ -183,7 +183,7 @@ class EventSerial(serializers.ModelSerializer):
         fields='__all__'
   ```
  
-   #IMAGES
+   # IMAGES and HOW TO USE
    
    1. LOGIN -[LINK](https://protoseek.herokuapp.com/account/login)
    2. Activation mail
