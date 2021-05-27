@@ -9,7 +9,7 @@ $("#unseen").on("click", function () {
       document.getElementById("eventname").style.display = "none";
       document.getElementsByClassName("output")[0].style.display = "flex";
       document.getElementById("dia").style.display = "none";
-
+      document.getElementById("infoteller").innerHTML = "PENDING ";
       let responeObject = respone.data;
       let tb = document.getElementById("TB");
       tb.innerHTML = "";
@@ -55,7 +55,9 @@ $("#verified").on("click", function () {
     },
     success: function (respone) {
       let responeObject = respone.data;
-      document.getElementById("eventname").style.display = "none";
+      //document.getElementById("eventname").style.display = "none";
+      document.getElementById("eventname").style.display = "table-cell";
+      document.getElementById("eventname").innerHTML = "Marks";
       document.getElementsByClassName("output")[0].style.display = "flex";
       document.getElementById("dia").style.display = "none";
       document.getElementById("infoteller").innerHTML = " MODERATED ";
@@ -68,23 +70,26 @@ $("#verified").on("click", function () {
         let link = responeObject[i].video_link;
         let date = responeObject[i].date;
         let uploadeduser = responeObject[i].by_email;
+        let marks = responeObject[i].marks;
         let tdtemp = document.createElement("td");
         tr.appendChild(tdtemp);
 
-        for (let j = 0; j < 3; j++) {
+        for (let j = 0; j < 4; j++) {
           let td = document.createElement("td");
-
           if (j === 0) {
+            td.innerHTML = marks;
+          }
+          if (j === 1) {
             let a = document.createElement("a");
             a.setAttribute("href", "/videos/" + link);
             a.setAttribute("target", "_blank");
             a.innerHTML = "LINK";
             td.appendChild(a);
           }
-          if (j === 1) {
+          if (j === 2) {
             td.innerHTML = date;
           }
-          if (j === 2) {
+          if (j === 3) {
             td.innerHTML = uploadeduser;
           }
 
@@ -97,7 +102,6 @@ $("#verified").on("click", function () {
 });
 
 $("#filterbyevent").on("click", function () {
-  
   $.ajax({
     type: "GET",
     url: "/events/",
@@ -107,7 +111,10 @@ $("#filterbyevent").on("click", function () {
       document.getElementById("eventname").style.display = "table-cell";
       document.getElementsByClassName("output")[0].style.display = "flex";
       document.getElementById("dia").style.display = "none";
-      document.getElementById("infoteller").innerHTML = "SORT BY EVENTS ";
+      document.getElementById("infoteller").innerHTML =
+        "SORT BY EVENTS PENDING VIDEOS ";
+      document.getElementById('infoteller').style.fontSize="18px"
+
       let tb = document.getElementById("TB");
       tb.innerHTML = "";
       let upd = document.getElementById("UPD");

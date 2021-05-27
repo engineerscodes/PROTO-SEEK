@@ -1,21 +1,186 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All | Class | Student</title>
+    <link rel="stylesheet" href="{% static 'css/headercss.css' %}">
+    <link rel="stylesheet" href="{% static  'css/homepage.css' %}">
+    <script src="https://kit.fontawesome.com/427ff44d09.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <style>
+        .container{
+        
+        position: relative;
+        display: grid;
+        justify-content: space-between;
+        padding-left: 50px;
+        padding-right: 50px;
+        grid-template-columns: repeat(3,1fr);
+        align-self: center;
+        }
+
+        .container .card{
+        position: relative;
+        cursor: pointer;
+        }
+
+        .container .card .face{
+        width: 300px;
+        height: 200px;
+        transition: 0.5s;
+        }
+
+        .container .card .face.face1{
+        position: relative;
+        background: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+        transform: translateY(100px);
+        }
+
+        .container .card:hover .face.face1{
+        background: #ff0057;
+        transform: translateY(0);
+        }
+
+        .container .card .face.face1 .content{
+        opacity: 0.2;
+        transition: 0.5s;
+        }
+
+        .container .card:hover .face.face1 .content{
+        opacity: 1;
+        }
+
+        .container .card .face.face1 .content img{
+        max-width: 100px;
+        }
+
+        .container .card .face.face1 .content h3{
+        margin: 10px 0 0;
+        padding: 0;
+        color: #fff;
+        text-align: center;
+        font-size: 1.5em;
+        }
+
+        .container .card .face.face2{
+        position: relative;
+        background: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        box-sizing: border-box;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+        transform: translateY(-100px);
+        }
+
+        .container .card:hover .face.face2{
+        transform: translateY(0);
+        }
+
+        .container .card .face.face2 .content p{
+        margin: 0;
+        padding: 0;
+        color:  #ff0057;
+        }
+
+        .container .card .face.face2 .content p b{
+            color: #ff0057;
+        }
+
+        .container .card .face.face2 .content a{
+        margin: 15px 0 0;
+        display: inline-block;
+        text-decoration: none;
+        font-weight: 900;
+        color: #333;
+        padding: 5px;
+        border: 1px solid #333;
+        }
+
+        .container .card .face.face2 .content a:hover{
+        background: #333;
+        color: rgb(248, 248, 248);
+        }
+
+          @media only screen and (max-width: 1140px) {
+
+        
+             .container{
+                 grid-template-columns: repeat(2,1fr);
+             }
+
+          }
+
+          @media only screen and (max-width: 760px) {
+
+
+          .container{
+          grid-template-columns: repeat(1,1fr);
+          }
+
+          }
+    </style>
 </head>
 
 <body>
-    <h1>{{user}}</h1>
-    {% for i ,j in classes %}
-    <div>
-        <a href="class/{{i.classId}}/{{i.id}}">{{j.classRoomName}}</a>
-
+    {% include "header.html" %}
+    <div style="text-align: center; font-size: 24px;">
+        <h1 style="color: black; padding: 25px;">CLASS ROOMS</h1>
     </div>
-    {% endfor %}
+     <div class="container containerHomepage">
+             
+           {% for i ,j in classes %}
+              <div class="card">
+                    <div class="face face1">
+                            <div class="content">
+                                <img
+                                    src="https://github.com/Jhonierpc/WebDevelopment/blob/master/CSS%20Card%20Hover%20Effects/img/launch_128.png?raw=true">
+                                <h3>CLASS</h3>
+                            </div>
+                        </div>
+                        <div class="face face2">
+                            <div class="content">
+                                <p><b>{{j.classRoomName}}</b></p>
+                                <a href="class/{{i.classId}}/{{i.id}}">Upload</a>
+                            </div>
+                        </div>
+              </div>
+              {% endfor %}
+
+             
+     </div>
+         
+      {% include "footer.html" %}
+
+
+   
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+        $('.icon').click(function () {
+            $('span').toggleClass("cancel");
+
+
+            const mediaQuery = window.matchMedia('(max-width: 990px)')
+
+            if (mediaQuery.matches) {
+                let win = document.getElementsByClassName('containerHomepage')[0];
+                if (!win.classList.contains('fullheader'))
+                    win.classList.add('fullheader');
+                else
+                    win.classList.remove('fullheader');
+            }
+
+        });
+    </script>
 </body>
 
 </html>

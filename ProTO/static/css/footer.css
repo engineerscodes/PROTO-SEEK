@@ -1,59 +1,93 @@
-.footer-basic {
-    padding: 40px 0;
-    background-color: #ffffff;
-    color: #4b4c4d;
-}
-
-.footer-basic ul {
-    padding: 0;
-    list-style: none;
+.dummy_page {
+    height: 200px;
+    width: 100%;
+    background-color: #f0f0f0;
     text-align: center;
-    font-size: 18px;
-    line-height: 1.6;
-    margin-bottom: 0;
+    box-sizing: border-box;
+    padding: 60px 0px;
 }
-
-.footer-basic li {
-    padding: 0 10px;
-}
-
-.footer-basic ul a {
-    color: inherit;
+a{
     text-decoration: none;
-    opacity: 0.8;
+}
+.footer {
+    width: 100%;
+    position: relative;
+    height: auto;
+    background-color: #070617;
+    margin-top: 80px;
 }
 
-.footer-basic ul a:hover {
-    opacity: 1;
+.footer .col {
+    width: 190px;
+    height: auto;
+    float: left;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    padding: 0px 20px 20px 20px;
 }
 
-.footer-basic .social {
-    text-align: center;
-    padding-bottom: 25px;
+.footer .col h1 {
+    margin: 0;
+    padding: 0;
+    font-family: inherit;
+    font-size: 12px;
+    line-height: 17px;
+    padding: 20px 0px 5px 0px;
+    color: rgba(255, 255, 255, 0.2);
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.250em;
 }
 
-.footer-basic .social>a {
-    font-size: 24px;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
+.footer .col ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.footer .col ul li {
+    color: #999999;
+    font-size: 14px;
+    font-family: inherit;
+    font-weight: bold;
+    padding: 5px 0px 5px 0px;
+    cursor: pointer;
+    transition: .2s;
+    -webkit-transition: .2s;
+    -moz-transition: .2s;
+}
+
+.social ul li {
     display: inline-block;
-    text-align: center;
-    border-radius: 50%;
-    border: 1px solid #ccc;
-    margin: 0 8px;
-    color: inherit;
-    opacity: 0.75;
+    padding-right: 5px !important;
 }
 
-.footer-basic .social>a:hover {
-    opacity: 0.9;
+.footer .col ul li:hover {
+    color: #ffffff;
+    transition: .1s;
+    -webkit-transition: .1s;
+    -moz-transition: .1s;
 }
 
-.footer-basic .copyright {
-    margin-top: 15px;
-    text-align: center;
-    font-size: 13px;
-    color: #aaa;
-    margin-bottom: 0;
+.clearfix {
+    clear: both;
+}
+
+@media only screen and (min-width: 1280px) {
+    .contain {
+        width: 1200px;
+        margin: 0 auto;
+    }
+}
+
+@media only screen and (max-width: 1139px) {
+    .contain .social {
+        width: 1000px;
+        display: block;
+    }
+
+    .social h1 {
+        margin: 0px;
+    }
 }

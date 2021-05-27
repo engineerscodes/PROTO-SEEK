@@ -74,10 +74,14 @@ def get_class(request, cl_name, cl_id):
                 #print(class_event)
                 return redirect('/upload/')
             else:
-                return HttpResponse("You cannot Access this Class")
+                #return HttpResponse("You cannot Access this Class")
+                messages.info(request,'You cannot Access this Class')
+                return redirect('/teacher/join/')
         except Exception as e:
             print(e)
-            return HttpResponse("No SUCH CLASS ROOM EXIST")
+            #return HttpResponse("No SUCH CLASS ROOM EXIST")
+            messages.info(request, 'No SUCH CLASS ROOM EXIST')
+            return redirect('/teacher/join/')
 
 
 
@@ -145,9 +149,12 @@ def getSingleVideo(request, uuid):
     try:
         is_teacher = TEACHER.objects.get(teacher=request.user)
         if not is_teacher.is_active:
-            return HttpResponse("Your Request Is Pending for Admin review")
+            #return HttpResponse("Your Request Is Pending for Admin review")
+            messages.info(request,'Your Request Is Pending for Admin review')
+            return redirect('/teacher/')
     except Exception as e:
         return HttpResponse("Your Not Teacher Plz Contact your Admin")
+
 
     if request.method == 'GET':
         try:
@@ -161,11 +168,12 @@ def getSingleVideo(request, uuid):
             Is_teacher_room=TeacherClassRoom.objects.get(pk=str(temp))
             print(Is_teacher_room.teacher)
             if  not Is_teacher_room.teacher==TEACHER.objects.get(pk=request.user) :
-                 return HttpResponse('No Access')
+                 #return HttpResponse('No Access')
+                 return render(request,'Noacess.html',{'text':"NO ACCESS",'i':'You cannot view this video file!!'})
         except Exception as e:
             video = None
-            print(e)
-            return HttpResponse("Video Doesnot Exist")
+            #return HttpResponse("Video Doesnot Exist")
+            return render(request, 'Noacess.html', {'text': "NOT FOUND", 'i': 'VIDEO DOESNOT EXIST!!'})
 
         if video is not None:
             try:
@@ -227,12 +235,12 @@ def getSingleVideo(request, uuid):
                 video_marks.save()
                 return redirect(f'/videos/{uuid}')
         else:
-            return redirect('/videos')
+            return redirect('/videos/')
 
 
 def allVideos_of_class(request):
 
-   return HttpResponse("SOON")
+   return redirect('/')
 
 @api_view(['GET'])
 def getcontent(request):
@@ -280,7 +288,9 @@ def classesInof(request):
                 correctVideo=videoUpload.objects.filter(EventID__in=all_events.values_list('id'), Total_marks__gt=0)
                 # print(all_video)
             else:
-                return HttpResponse("Your Request Is Pending for Admin review")
+                #return HttpResponse("Your Request Is Pending for Admin review")
+                messages.info("Your Request Is Pending for Admin review")
+                return redirect('/teacher/')
         except Exception as e:
             return HttpResponse("Your Not Teacher Plz Contact your Admin")
     return render(request, 'info.html', {'marks': correctVideo, 'LeftOver':pending_video })

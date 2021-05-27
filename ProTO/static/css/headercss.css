@@ -57,6 +57,7 @@
         box-shadow: 0 0 5px #33ffff, 0 0 6px #66ffff;
         border-radius: 6px;
         color: cyan;
+        text-decoration: none;
     }
 
     nav ul li:hover>ul {
