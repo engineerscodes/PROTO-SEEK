@@ -11,10 +11,11 @@ a{
 }
 .footer {
     width: 100%;
-    position: relative;
+    position: absolute;
     height: auto;
     background-color: #070617;
     margin-top: 80px;
+    bottom: 0;
 }
 
 .footer .col {
