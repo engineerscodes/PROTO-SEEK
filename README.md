@@ -14,7 +14,7 @@
 10. thumbnail generation useing Canvas Check out the file [link](https://github.com/engineerscodes/PROTO-SEEK/blob/91c30b3b7a21fac544e831b3ba48166b1ef7ba24/static/js/upload.js#L8)
 # ITS A VIDEO ASSESSMENT  CREATE ON ORGANISATION  
  keep in mind studens,techear
-# DIFFERENT LEVELS PRIVILEGES
+# DIFFERENT LEVELS OF PRIVILEGES
 <b> Students can access Few urls </b>
 <b> Teacher can access Few urls </b>
 <br>
