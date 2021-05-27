@@ -10,6 +10,7 @@
 6. bootstrap
 7. static_ranges for video
 8. dj_static
+9. Smpt2go for mailing verifying EMAIL ADDRESS OF USER
 # ITS A VIDEO ASSESSMENT  CREATE ON ORGANISATION  
  keep in mind studens,techear
 # DIFFERENT LEVELS PRIVILEGES
