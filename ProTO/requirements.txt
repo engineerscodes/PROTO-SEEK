@@ -7,3 +7,4 @@ pytz==2021.1
 sqlparse==0.4.1
 static-ranges==0.2.0
 static3==0.7.0
+whitenoise==5.2.0
