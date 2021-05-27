@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher </title>
+</head>
+<link rel="stylesheet" href="{% static 'css/headercss.css' %}">
+<link href="https://fonts.googleapis.com/css?family=Archivo+Black&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Archivo:700&display=swap" rel="stylesheet">
+<script src="https://kit.fontawesome.com/427ff44d09.js" crossorigin="anonymous"></script>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    .conatiner {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        background: linear-gradient(to right, #ea1d6f 0%, #eb466b 100%);
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        letter-spacing: 1.4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .ctn {
+        background: #3e3e3e;
+        height: 300px;
+        width: 400px;
+
+        position: relative;
+        border-radius: 15px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, .4);
+        color: #20dea0;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+    }
+</style>
+
+<body>
+    {% include "header.html" %}
+    <div class="conatiner">
+
+        <div class="ctn">
+            <div>
+                <a style="color: white;" href="/teacher/class/{{code}}">CLICK HERE</a>
+            </div>
+            <div>
+                <h1>SHARE THE CODE WITH STUDENT </h1>
+                <h1 style="text-decoration: underline;">{{code}}</h1>
+            </div>
+            <div>
+                {% for i in messages %}
+                <p>{{i}}</p>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

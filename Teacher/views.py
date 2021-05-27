@@ -54,7 +54,7 @@ def new_class(request):
                 url_enode = urlsafe_base64_encode(force_bytes(new_form.id))
                 new_form.class_url = url_enode
                 new_form.save()
-                return render(request,'gallery.html',{'code':url_enode})
+                return render(request,'gallery2.html',{'code':url_enode})
                 #return HttpResponse(f"CLASS CODE IS {url_enode} and urls is teacher/class/{url_enode}")
             except IntegrityError as e:
                 alclass=TeacherClassRoom.objects.get(teacher=TEACHER.objects.get(pk=request.user),classRoomName= form.cleaned_data['classRoomName'])

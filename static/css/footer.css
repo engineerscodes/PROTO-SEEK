@@ -11,7 +11,7 @@ a{
 }
 .footer {
     width: 100%;
-    position: absolute;
+    position: sticky;
     height: auto;
     background-color: #070617;
     margin-top: 80px;
