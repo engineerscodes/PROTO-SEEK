@@ -2,6 +2,8 @@
 <p align="center">
   <img src="https://user-images.githubusercontent.com/68312849/120022261-cbb7ef80-c009-11eb-9aae-8272271ce938.png" alt="logo">
 </p>
+<br>
+
 # Video Sharing platform for School and college
 # Tech used 
 1. django (Backend)
