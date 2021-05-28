@@ -37,7 +37,7 @@
    7. The mail will use this Email Address
    8. Buy your Domain name And Add it in allowed [here](https://github.com/engineerscodes/PROTO-SEEK/blob/9fa49765680980a7ea228ad5f5135b96b9229748/ProTO/settings.py#L28)
    9. Host your Django Project ON AWS OR DIGITAL OCEAN
-   10. Donot Host on Heruko(Free) because Request TimeOut
+   10. Don't Host on Heruko(Free) because Request TimeOut
    ![image](https://user-images.githubusercontent.com/68312849/119846761-0ba6a600-bf28-11eb-817f-74bbf31ed7d6.png)
    11. I have Still Hosted on Heruko (free) for now demo purpose 
    12. You cannot upload file to it ,because of Request TimeOut
