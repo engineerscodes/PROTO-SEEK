@@ -22,7 +22,7 @@
 <b> Students can access Few urls </b>
 <b> Teacher can access Few urls </b>
 <br>
-<b>User have to reg to become teacher url - [link](https://protoseek.herokuapp.com/teacher/)</b>
+<b>User have to reg to become teacher url - [link](https://protoseek.herokuapp.com/)</b>
 <br>
 <b> Admin of the ORGANISATION will review the request ,This method is used because Most of school or college May not have  ORGANISATION   Email </b>
 <hr>
