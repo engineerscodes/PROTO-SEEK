@@ -22,7 +22,7 @@
 <b> Students can access Few urls </b>
 <b> Teacher can access Few urls </b>
 <br>
-<b>User have to reg to become teacher url - [link](https://protoseek.herokuapp.com/)</b>
+<b>User have to reg to become teacher url - [link](https://protoseek.herokuapp.com/teacher/)</b>
 <br>
 <b> Admin of the ORGANISATION will review the request ,This method is used because Most of school or college May not have  ORGANISATION   Email </b>
 <hr>
@@ -46,7 +46,7 @@
    11. I have Still Hosted on Heruko (free) for now demo purpose 
    12. You cannot upload file to it ,because of Request TimeOut
    13. I recommend AWS HOSTING 
-   # link -https://protoseek.herokuapp.com/teacher/
+   # link -https://protoseek.herokuapp.com/
    
    # Working
    1. clone to Project Locally [](https://github.com/engineerscodes/PROTO-SEEK.git)
