@@ -32,7 +32,7 @@
 
 <br>
 
-   1. Fork or clone to Repo 
+   1. Fork or Clone the Repo 
    2. Change it As per Your ORGANISATION 
    3.<b>ADD YOUR SMPT2GO USERNAME AND PASSWORD -[CLICK](https://github.com/engineerscodes/PROTO-SEEK/blob/master/ProTO/CREAD.py) </b> 
    4. The Existing username and Password will be Changed soon
@@ -44,7 +44,7 @@
    10. Don't Host on Heruko(Free) because Request TimeOut
    ![image](https://user-images.githubusercontent.com/68312849/119846761-0ba6a600-bf28-11eb-817f-74bbf31ed7d6.png)
    11. I have Still Hosted on Heruko (free) for now demo purpose 
-   12. You cannot upload file to it ,because of Request TimeOut
+   12. You cannot upload file to it, because of Request TimeOut
    13. I recommend AWS HOSTING 
    # link -https://protoseek.herokuapp.com/
    
@@ -151,11 +151,11 @@ class Event(models.Model):
   
   ```
   
-  11. Since we are usign AIP you must have serializers class for this app
+  11. Since we are using AIP you must have serializers class for this app
   12. READ DJANGO DOC
   ```python
 from rest_framework import serializers
-from .models import videoUpload,Marks
+from .models import videoUpload, Marks
 from django.apps import apps
 Events=apps.get_model('Event','Event')
 
