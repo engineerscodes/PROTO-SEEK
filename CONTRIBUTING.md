@@ -14,4 +14,4 @@ class B(models.Model):
   
 #c is an instance of A
 >>> c.B_set.all()
-``
+```
