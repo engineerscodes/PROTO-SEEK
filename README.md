@@ -225,8 +225,10 @@ class EventSerial(serializers.ModelSerializer):
    ![image](https://user-images.githubusercontent.com/68312849/119856924-bb801180-bf30-11eb-9e16-68f2ed02ef94.png)
 
    
-   8. Click on video will open The vidoe for You in above image
-   9. Teacher can get all stat ,about uploads and pending videos  (link)[https://protoseek.herokuapp.com/teacher/info/]
+   8. Click on video will open The vidoe for You in above image![image](https://user-images.githubusercontent.com/68312849/122228123-2cce3700-ced5-11eb-8c78-fe1bfe2758b3.png)
+
+   9. Teacher can get all stat ,about uploads and pending videos 
+    (link)[https://protoseek.herokuapp.com/teacher/info/]
    ![image](https://user-images.githubusercontent.com/68312849/119855567-a5258600-bf2f-11eb-8bc6-1300d01108cf.png)
     ![image](https://user-images.githubusercontent.com/68312849/119855629-b53d6580-bf2f-11eb-8840-5d979d09ab3c.png)
    10. for Students the HomePage is [link](https://protoseek.herokuapp.com/student/)
