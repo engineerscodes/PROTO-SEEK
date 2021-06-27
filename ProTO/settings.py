@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-)%-&r4vb9bv85r3dti^3mjj#xe%w+yyjmc5wvr!#qk+)o3mlqu
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['protoseek.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['protoseek.azurewebsites.net']
 
 # Application definition
 
@@ -51,7 +51,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'ProTO.urls'
