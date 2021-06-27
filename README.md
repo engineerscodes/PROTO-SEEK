@@ -2,8 +2,9 @@
 <p align="center">
   <img src="https://user-images.githubusercontent.com/68312849/120022261-cbb7ef80-c009-11eb-9aae-8272271ce938.png" alt="logo">
 </p>
-<br>
-# LINK AZURE- https://protoseek.azurewebsites.net/teacher/info/
+<br> 
+
+# LINK AZURE- https://protoseek.azurewebsites.net/
 
 # Video Sharing platform for School and college
 # Tech used 
